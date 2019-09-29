@@ -13,7 +13,7 @@ spec:
       labels:
         app: openhab
     spec:
-      hostNetwork: true
+#      hostNetwork: true
       imagePullSecrets:
         - name: regcred
       nodeSelector:
@@ -21,9 +21,9 @@ spec:
       containers:
       - name: openhab
         image: k3s-master-1:5000/openhab:2.5.0.M3
-        imagePullPolicy: Always
+#        imagePullPolicy: Always
 #        image: 471117/openhab:latest
-#        imagePullPolicy: IfNotPresent
+        imagePullPolicy: IfNotPresent
         ports:
 #        - containerPort: 8080
 #          name: http
@@ -61,21 +61,33 @@ spec:
         hostPath:
           path: /usr/share/zoneinfo/Europe/Stockholm
       - name: openhab-conf
-        hostPath:
-          path: /openhab/conf
+        persistentVolumeClaim:
+          claimName: openhab-conf-claim
+#        hostPath:
+#          path: /openhab/conf
       - name: openhab-userdata
-        hostPath:
-          path: /openhab/userdata
+        persistentVolumeClaim:
+          claimName: openhab-userdata-claim
+#       hostPath:
+#         path: /openhab/userdata
       - name: openhab-addons
-        hostPath:
-          path: /openhab/addons
+#        hostPath:
+#          path: /openhab/addons
+        persistentVolumeClaim:
+          claimName: openhab-addons-claim
       - name: openhab-lib
-        hostPath:
-          path: /openhab/lib
+        persistentVolumeClaim:
+          claimName: openhab-lib-claim
+#        hostPath:
+#          path: /openhab/lib
       - name: openhab-java
-        hostPath:
-          path: /openhab/.java
+        persistentVolumeClaim:
+          claimName: openhab-java-claim
+#        hostPath:
+#          path: /openhab/.java
       - name: openhab-karaf
-        hostPath:
-          path: /openhab/.karaf
+        persistentVolumeClaim:
+          claimName: openhab-karaf-claim
+#        hostPath:
+#          path: /openhab/.karaf
       terminationGracePeriodSeconds: 300

@@ -7,23 +7,23 @@ metadata:
   labels:
     app: openhab
 spec:
-  type: NodePort
+#  type: NodePort
   selector:
     app: openhab
   ports:
-    - port: 80
+    - port: 8080
       protocol: TCP
       targetPort: 8080
-      nodePort: 30080
+#      nodePort: 30080
       name: openhab-http
     - port: 8443
       protocol: TCP
       targetPort: 8443
-      nodePort: 30443
+#      nodePort: 30443
       name: openhab-https
     - port: 8101
       protocol: TCP
       targetPort: 8101
       name: openhab-console
-      nodePort: 30101
+#      nodePort: 30101
 
